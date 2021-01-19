@@ -142,10 +142,15 @@ def get_target_price(code):
         else:
             lastday = ohlc.iloc[0]
             today_open = lastday[3]
+
         lastday_high = lastday[1]
         lastday_low = lastday[2]
-        target_price = today_open + (lastday_high - lastday_low) * 0.5
-        return target_price
+        lastday_close = lastday[3]
+        current_price, ask_price, bid_price = get_current_price(code)
+        target_price1 = lastday_close * 1.15    #전일 종가대비 당일 15%이상
+        target_price2 = today_open * 1.1        #당일 시가대비 10%이상
+        #target_price = today_open + (lastday_high - lastday_low) * 0.5
+        return target_price1, target_price2
     except Exception as ex:
         dbgout("`get_target_price() -> exception! " + str(ex) + "`")
         return None
@@ -178,7 +183,7 @@ def buy_etf(code):
             return False
         time_now = datetime.now()
         current_price, ask_price, bid_price = get_current_price(code)
-        target_price = get_target_price(code)    # 매수 목표가
+        target_price1, target_price2 = get_target_price(code)    # 매수 목표가
         ma5_price = get_movingaverage(code, 5)   # 5일 이동평균가
         ma10_price = get_movingaverage(code, 10)  # 10일 이동평균가
         buy_qty = 0        # 매수할 수량 초기화
@@ -187,7 +192,7 @@ def buy_etf(code):
         stock_name, stock_qty = get_stock_balance(code)  # 종목명과 보유수량 조회
         # printlog('bought_list:', bought_list, 'len(bought_list):',
         #    len(bought_list), 'target_buy_count:', target_buy_count)
-        if current_price > target_price and current_price > ma5_price \
+        if (current_price > target_price1 or current_price > target_price2) and current_price > ma5_price \
                 and current_price > ma10_price:
             printlog(stock_name + '(' + str(code) + ') ' + str(buy_qty) +
                      'EA : ' + str(current_price) + ' meets the buy condition!`')
