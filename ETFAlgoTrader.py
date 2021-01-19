@@ -8,7 +8,7 @@ from slacker import Slacker
 import time
 import calendar
 
-slack = Slacker('xoxb-341411373331-390645946323-wPFYKNbhlgef4bMUiP1CvSyX')
+# slack = Slacker('자신의 Slack OAuth Code')
 
 
 def dbgout(message):
