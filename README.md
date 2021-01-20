@@ -1,11 +1,11 @@
 # 세력봉 매매기법을 활용한 주식자동매매 프로그램입니다.
 
-**세력봉이란?**
+**세력봉이란?**</br>
 세력이 관여했다는 증거
 
-**매수 전략**
-전일 종가대비 당일 15%이상
-당일 시가대비 10%이상
+**매수 전략**</br>
+전일 종가대비 당일 15%이상</br>
+당일 시가대비 10%이상</br>
 
 **매도 전략**
 당일 장 마감전 일괄 판매
@@ -24,7 +24,7 @@ https://www.youtube.com/watch?v=4DzGOpsT3bw
 *Slack 알림 봇 만들기 참고 영상*</br>
 https://www.youtube.com/watch?v=s24dxIp-Cp0
 
-**필요 모듈 설치**
+**필요 모듈 설치**</br>
 cmd창 실행</br>
 pip install pywinauto</br>
 pip install pandas</br>
