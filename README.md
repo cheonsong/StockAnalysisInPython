@@ -1,11 +1,11 @@
-세력봉 매매기법을 활용한 주식자동매매 프로그램입니다.
+# 세력봉 매매기법을 활용한 주식자동매매 프로그램입니다.
 
 세력봉이란?
 세력이 관여했다는 증거
 
 [매수 전략]
-# 전일 종가대비 당일 15%이상
-# 당일 시가대비 10%이상
+전일 종가대비 당일 15%이상
+당일 시가대비 10%이상
 
 [매도 전략]
 당일 장 마감전 일괄 판매
@@ -24,13 +24,21 @@ https://www.youtube.com/watch?v=4DzGOpsT3bw
 Slack 알림 봇 만들기 참고 영상
 https://www.youtube.com/watch?v=s24dxIp-Cp0
 
+[필요 모듈 설치]
+cmd창 실행
+pip install pywinauto
+pip install pandas
+pip install pywin32
+pip install slacker
+(pip upgrade 경고가 뜰 시 python -m pip install --upgrade pip)
+
 [사용 방법]
 1. AutoConnect.py - line 12
 app.start('C:\CREON\STARTER\coStarter.exe /prj:cp /id:*** /pwd:*** /pwdcert:*** /autostart')
 *** -> 자신의 id, pw, 인증서로 교체
 
 2. ETFAlgoTrader.py - line 11
-# slack = Slacker('자신의 Slack OAuth Code')
+slack = Slacker('자신의 Slack OAuth Code')
 맨 앞에 # 제거후  자신의 Slack OAuth Code를 입력합니다.
 
 3. ETFAlgoTrader.py - line 18
