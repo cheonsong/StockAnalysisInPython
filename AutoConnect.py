@@ -9,5 +9,5 @@ os.system('wmic process where "name like \'%CpStart%\'" call terminate')
 time.sleep(5)
 
 app = application.Application()
-app.start('C:\CREON\STARTER\coStarter.exe /prj:cp /id:wjd6254 /pwd:qlqjs1@.. /pwdcert:5099jina.. /autostart')
+app.start('C:\CREON\STARTER\coStarter.exe /prj:cp /id:*** /pwd:*** /pwdcert:*** /autostart')
 time.sleep(60)
