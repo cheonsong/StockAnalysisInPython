@@ -147,8 +147,8 @@ def get_target_price(code):
         lastday_low = lastday[2]
         lastday_close = lastday[3]
         current_price, ask_price, bid_price = get_current_price(code)
-        target_price1 = lastday_close * 1.15    #전일 종가대비 당일 15%이상
-        target_price2 = today_open * 1.1        #당일 시가대비 10%이상
+        target_price1 = lastday_close * 1.15  # 전일 종가대비 당일 15%이상
+        target_price2 = today_open * 1.1  # 당일 시가대비 10%이상
         #target_price = today_open + (lastday_high - lastday_low) * 0.5
         return target_price1, target_price2
     except Exception as ex:
@@ -186,6 +186,7 @@ def buy_etf(code):
         target_price1, target_price2 = get_target_price(code)    # 매수 목표가
         ma5_price = get_movingaverage(code, 5)   # 5일 이동평균가
         ma10_price = get_movingaverage(code, 10)  # 10일 이동평균가
+        ma20_price = get_movingaverage(code, 20)    # 20일 이동평균가 추가
         buy_qty = 0        # 매수할 수량 초기화
         if ask_price > 0:  # 매수호가가 존재하면
             buy_qty = buy_amount // ask_price
@@ -193,7 +194,7 @@ def buy_etf(code):
         # printlog('bought_list:', bought_list, 'len(bought_list):',
         #    len(bought_list), 'target_buy_count:', target_buy_count)
         if (current_price > target_price1 or current_price > target_price2) and current_price > ma5_price \
-                and current_price > ma10_price:
+                and current_price > ma10_price and current_price > ma20_price:
             printlog(stock_name + '(' + str(code) + ') ' + str(buy_qty) +
                      'EA : ' + str(current_price) + ' meets the buy condition!`')
             cpTradeUtil.TradeInit()
@@ -283,17 +284,17 @@ if __name__ == '__main__':
         while True:
             t_now = datetime.now()
             t_9 = t_now.replace(hour=9, minute=0, second=0, microsecond=0)
-            t_start = t_now.replace(hour=9, minute=5, second=0, microsecond=0)
+            t_start = t_now.replace(hour=9, minute=0, second=0, microsecond=0)
             t_sell = t_now.replace(hour=15, minute=15, second=0, microsecond=0)
-            t_exit = t_now.replace(hour=15, minute=20, second=0, microsecond=0)
+            t_exit = t_now.replace(hour=15, minute=25, second=0, microsecond=0)
             today = datetime.today().weekday()
-            if today == 5 or today == 6:  # 토요일이나 일요일이면 자동 종료
+            if today == 5 or today == 6:  # 장이 열리지 않는 토요일이나 일요일이면 자동 종료
                 printlog('Today is', 'Saturday.' if today == 5 else 'Sunday.')
                 sys.exit(0)
             if t_9 < t_now < t_start and soldout == False:
                 soldout = True
                 sell_all()
-            if t_start < t_now < t_sell:  # AM 09:05 ~ PM 03:15 : 매수
+            if t_start < t_now < t_sell:  # AM 09:00 ~ PM 03:15 : 매수
                 for sym in symbol_list:
                     if len(bought_list) < target_buy_count:
                         buy_etf(sym)
@@ -301,11 +302,11 @@ if __name__ == '__main__':
                 if t_now.minute == 30 and 0 <= t_now.second <= 5:
                     get_stock_balance('ALL')
                     time.sleep(5)
-            if t_sell < t_now < t_exit:  # PM 03:15 ~ PM 03:20 : 일괄 매도
+            if t_sell < t_now < t_exit:  # PM 03:15 ~ PM 03:25 : 일괄 매도
                 if sell_all() == True:
                     dbgout('`sell_all() returned True -> self-destructed!`')
                     sys.exit(0)
-            if t_exit < t_now:  # PM 03:20 ~ :프로그램 종료
+            if t_exit < t_now:  # PM 03:25 ~ : 프로그램 종료
                 dbgout('`self-destructed!`')
                 sys.exit(0)
             time.sleep(3)
