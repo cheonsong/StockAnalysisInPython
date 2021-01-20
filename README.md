@@ -7,7 +7,7 @@
 전일 종가대비 당일 15%이상</br>
 당일 시가대비 10%이상</br>
 
-**매도 전략**
+**매도 전략**</br>
 당일 장 마감전 일괄 판매
 
 **필수 요소**
@@ -30,6 +30,7 @@ pip install pywinauto</br>
 pip install pandas</br>
 pip install pywin32</br>
 pip install slacker</br>
+pip install PyQt5</br>
 (pip upgrade 경고가 뜰 시 python -m pip install --upgrade pip)</br>
 
 **사용 방법**
@@ -47,3 +48,7 @@ slack.chat.post_message('#stock', strbuf)
 
 4. ETFAlgoTrader.py - line 269</br>
 종목명이 담긴 symbol_list를 자신이 투자하길 원하는 종목으로 교체합니다.
+
+### 추가
+**당일 상승률 상위 200 종목을 가져와 현재가  실시간 조회**</br>
+UpStock.py 실행 후 요청 시작 버튼 클릭시 상위 200 종목을 가져와 보여줍니다.
