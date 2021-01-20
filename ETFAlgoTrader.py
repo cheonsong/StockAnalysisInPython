@@ -8,14 +8,14 @@ from slacker import Slacker
 import time
 import calendar
 
-# slack = Slacker('자신의 Slack OAuth Code')
+slack = Slacker('OAuth code')
 
 
 def dbgout(message):
     """인자로 받은 문자열을 파이썬 셸과 슬랙으로 동시에 출력한다."""
     print(datetime.now().strftime('[%m/%d %H:%M:%S]'), message)
     strbuf = datetime.now().strftime('[%m/%d %H:%M:%S] ') + message
-    slack.chat.post_message('#stock', strbuf)
+    slack.chat.post_message('#d', strbuf)
 
 
 def printlog(message, *args):
