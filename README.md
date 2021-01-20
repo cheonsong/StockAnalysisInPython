@@ -33,17 +33,17 @@ pip install slacker</br>
 (pip upgrade 경고가 뜰 시 python -m pip install --upgrade pip)</br>
 
 **사용 방법**
-1. AutoConnect.py - line 12
+1. AutoConnect.py - line 12</br>
 app.start('C:\CREON\STARTER\coStarter.exe /prj:cp /id:*** /pwd:*** /pwdcert:*** /autostart')
 *** -> 자신의 id, pw, 인증서로 교체
 
-2. ETFAlgoTrader.py - line 11
-slack = Slacker('자신의 Slack OAuth Code')
-맨 앞에 # 제거후  자신의 Slack OAuth Code를 입력합니다.
+2. ETFAlgoTrader.py - line 11</br>
+slack = Slacker('자신의 Slack OAuth Code')</br>
+자신의 Slack OAuth Code를 입력합니다.
 
-3. ETFAlgoTrader.py - line 18
+3. ETFAlgoTrader.py - line 18</br>
 slack.chat.post_message('#stock', strbuf)
 #stock 부분을 자신의 slack 채널로 교체합니다.
 
-4. ETFAlgoTrader.py - line 269
+4. ETFAlgoTrader.py - line 269</br>
 종목명이 담긴 symbol_list를 자신이 투자하길 원하는 종목으로 교체합니다.
