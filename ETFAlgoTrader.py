@@ -8,7 +8,7 @@ from slacker import Slacker
 import time
 import calendar
 
-slack = Slacker('OAuth code')
+slack = Slacker('xoxb-1636055045527-1647749675557-xErLW1hReFDGEcO5eE5yWBvD')
 
 
 def dbgout(message):
@@ -283,7 +283,7 @@ if __name__ == '__main__':
         while True:
             t_now = datetime.now()
             t_9 = t_now.replace(hour=9, minute=0, second=0, microsecond=0)
-            t_start = t_now.replace(hour=9, minute=0, second=0, microsecond=0)
+            t_start = t_now.replace(hour=9, minute=5, second=0, microsecond=0)
             t_sell = t_now.replace(hour=15, minute=15, second=0, microsecond=0)
             t_exit = t_now.replace(hour=15, minute=25, second=0, microsecond=0)
             today = datetime.today().weekday()
